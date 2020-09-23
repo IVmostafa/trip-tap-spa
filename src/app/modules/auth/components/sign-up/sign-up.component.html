@@ -10,11 +10,12 @@
     [formGroup]="signUpForm"
     (submit)="signIn(signUpForm.value)"
   >
-    <trip-field
+    <trip-float-label-field
       translationPath="AUTH.FIELDS"
       label="FIRST_NAME"
       [labelFor]="FieldsNames.FirstName"
       [formGroup]="signUpForm"
+      [isRequired]="true"
     >
       <input
         pInputText
@@ -24,13 +25,14 @@
         type="text"
         [formControlName]="FieldsNames.FirstName"
       >
-    </trip-field>
+    </trip-float-label-field>
 
-    <trip-field
+    <trip-float-label-field
       translationPath="AUTH.FIELDS"
       label="LAST_NAME"
       [labelFor]="FieldsNames.LastName"
       [formGroup]="signUpForm"
+      [isRequired]="true"
     >
       <input
         pInputText
@@ -40,13 +42,14 @@
         type="text"
         [formControlName]="FieldsNames.LastName"
       >
-    </trip-field>
+    </trip-float-label-field>
 
-    <trip-field
+    <trip-float-label-field
       translationPath="AUTH.FIELDS"
       label="EMAIL"
       [labelFor]="FieldsNames.Email"
       [formGroup]="signUpForm"
+      [isRequired]="true"
     >
       <input
         pInputText
@@ -56,13 +59,14 @@
         type="text"
         [formControlName]="FieldsNames.Email"
       >
-    </trip-field>
+    </trip-float-label-field>
 
-    <trip-field
+    <trip-float-label-field
       translationPath="AUTH.FIELDS"
       label="PASSWORD"
       [labelFor]="FieldsNames.Password"
       [formGroup]="signUpForm"
+      [isRequired]="true"
     >
       <input
         pInputText
@@ -71,9 +75,9 @@
         type="password"
         [formControlName]="FieldsNames.Password"
       >
-    </trip-field>
+    </trip-float-label-field>
 
-    <trip-field>
+    <trip-float-label-field>
       <p-checkbox
         binary="true"
         [label]="'AUTH.FIELDS.SIGN_UP_AS_TRIP_ORGANIZER' | translate"
@@ -82,7 +86,59 @@
         [formControlName]="FieldsNames.IsTripOrganizer"
       ></p-checkbox>
 
-    </trip-field>
+    </trip-float-label-field>
+
+    <trip-float-label-field
+      *ngIf="signUpForm.contains(FieldsNames.PhoneNumber)"
+      translationPath="AUTH.FIELDS"
+      label="PHONE_NUMBER"
+      [labelFor]="FieldsNames.PhoneNumber"
+      [formGroup]="signUpForm"
+      [isRequired]="true"
+    >
+      <input
+        pInputText
+        autocomplete="off"
+        [id]="FieldsNames.PhoneNumber"
+        class="form-field__input"
+        type="tel"
+        [formControlName]="FieldsNames.PhoneNumber"
+      >
+    </trip-float-label-field>
+
+    <trip-float-label-field
+      *ngIf="signUpForm.contains(FieldsNames.FacebookId)"
+      translationPath="AUTH.FIELDS"
+      label="FACEBOOK"
+      [labelFor]="FieldsNames.FacebookId"
+      [formGroup]="signUpForm"
+    >
+      <input
+        pInputText
+        autocomplete="off"
+        [id]="FieldsNames.FacebookId"
+        class="form-field__input"
+        type="text"
+        [formControlName]="FieldsNames.FacebookId"
+      >
+    </trip-float-label-field>
+
+    <trip-float-label-field
+      *ngIf="signUpForm.contains(FieldsNames.InstagramId)"
+      translationPath="AUTH.FIELDS"
+      label="INSTAGRAM"
+      [labelFor]="FieldsNames.InstagramId"
+      [formGroup]="signUpForm"
+    >
+      <input
+        pInputText
+        autocomplete="off"
+        [id]="FieldsNames.InstagramId"
+        class="form-field__input"
+        type="text"
+        [formControlName]="FieldsNames.InstagramId"
+      >
+    </trip-float-label-field>
 
     <p-button
       class="signup__form_submit"

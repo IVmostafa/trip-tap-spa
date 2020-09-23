@@ -1,0 +1,121 @@
+<div class="create-trip">
+  <img
+    class="create-trip__logo"
+    src="assets/images/logo-white.png"
+    [alt]="'APP.TRIP_LOGO' | translate"
+  />
+
+  <form
+    class="create-trip__form"
+    [formGroup]="createTripForm"
+    (submit)="createTrip(createTripForm.value)"
+  >
+    <div class="create-trip__form_main-details">
+      <p-fileUpload
+        class="create-trip__form_upload form-field__upload"
+        customUpload="true"
+        accept="image/jpg, image/png, image/jpeg"
+        [id]="FieldsNames.Email"
+        maxFileSize="2000000"
+        auto="true"
+        (uploadHandler)="upload($event.files)"
+      >
+        <ng-template pTemplate="content">
+          <span class="ui-clickable pi pi-plus"></span>
+        </ng-template>
+
+        <ng-template pTemplate="file" let-file>
+          <img
+            class="create-trip__form_upload_image"
+            [src]="file.objectURL"
+          />
+        </ng-template>
+      </p-fileUpload>
+
+      <div class="create-trip__form_main-fields">
+        <trip-float-label-field
+          class="create-trip__form_name"
+          translationPath="TRIP.FIELDS"
+          label="NAME"
+          [labelFor]="FieldsNames.Name"
+          [formGroup]="createTripForm"
+        >
+          <input
+            pInputText
+            autocomplete="off"
+            [id]="FieldsNames.Name"
+            class="form-field__input"
+            type="text"
+            [formControlName]="FieldsNames.Name"
+          >
+        </trip-float-label-field>
+
+        <trip-float-label-field
+          class="create-trip__form_location"
+          translationPath="TRIP.FIELDS"
+          label="LOCATION"
+          [labelFor]="FieldsNames.Location"
+          [formGroup]="createTripForm"
+        >
+          <input
+            pInputText
+            autocomplete="off"
+            [id]="FieldsNames.Location"
+            class="form-field__input"
+            type="text"
+            [formControlName]="FieldsNames.Location"
+          >
+        </trip-float-label-field>
+      </div>
+    </div>
+
+    <div class="create-trip__form_available-dates">
+      <label
+        class="create-trip__form_available-dates_label"
+        [for]="FieldsNames.AvailableDates"
+      >
+        {{ 'TRIP.FIELDS.DATES_AVAILABLE' | translate }}
+      </label>
+
+      <div class="calendar__container">
+        <span class="pi pi-play"></span>
+
+        <p-calendar
+          [formControlName]="FieldsNames.AvailableDates"
+          selectionMode="multiple"
+          [readonlyInput]="true"
+          [touchUI]="true"
+          [minDate]="availableDatesMinDate"
+          [locale]="calendarLocale"
+          class="calendar form-field__calendar"
+        >
+          <ng-template pTemplate="disabledDate" let-date>
+            <label class="create-trip__form_available-dates_date">
+              {{ date.day }}
+            </label>
+          </ng-template>
+
+          <ng-template pTemplate="date" let-date>
+            <label class="create-trip__form_available-dates_date">
+              {{ date.day }}
+            </label>
+          </ng-template>
+
+          <p-footer class="calendar__footer">
+            <p-button
+              class="calendar__footer_done"
+              styleClass="create-trip-calendar-done"
+              type="button"
+              [label]="'TRIP.DONE' | translate"
+              (onClick)="closeCalendar()"
+            ></p-button>
+          </p-footer>
+        </p-calendar>
+
+        <span class="create-trip__form_available-dates_selected-date">
+          {{ selectedDates }}
+        </span>
+      </div>
+    </div>
+  </form>
+</div>
